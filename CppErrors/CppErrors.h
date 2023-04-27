@@ -14,6 +14,8 @@
 
 using namespace std;
 
+#pragma region CppErrors
+
 class CppErrors
 {
 	vector<string> errors;
@@ -50,6 +52,11 @@ public:
 	bool IsValid() const {
 		return !errors.empty();
 	}
+
+	// 清空错误
+	void Clear() {
+		errors.clear();
+	}
 };
 
 #define CPP_ERRORS_WRAP(cppErrors, error)	\
@@ -58,5 +65,19 @@ public:
 	ss << "[" << __FILE__ << ":" << __LINE__ << "(" << __FUNCTION__ << ")] " << error;	\
 	cppErrors.AddError(ss.str());	\
 }
+
+#pragma endregion
+
+#pragma region GlobalCppErrors
+
+CppErrors globalCppErrors;
+
+#define GLOBAL_CPP_ERRORS_WRAP(error)		CPP_ERRORS_WRAP(globalCppErrors, error)
+#define GLOBAL_CPP_ERRORS_CLEAR				globalCppErrors.Clear()
+#define GLOBAL_CPP_ERRORS_IS_VALID			globalCppErrors.IsValid()
+#define GLOBAL_CPP_ERRORS_GET_ERRORS		globalCppErrors.GetErrors()
+#define GLOBAL_CPP_ERRORS_GET_FIRST_ERROR	globalCppErrors.GetFirstError()
+
+#pragma endregion
 
 #endif // __CPP_ERRORS_H__

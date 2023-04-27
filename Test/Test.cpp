@@ -5,43 +5,42 @@
 
 #include "CppErrors.h"
 
-void test4(CppErrors& cppErrors)
+void normalTest4(CppErrors& cppErrors)
 {
-	CPP_ERRORS_WRAP(cppErrors, "test4 error");
+	CPP_ERRORS_WRAP(cppErrors, "normalTest4 error");
 }
 
-void test3(CppErrors& cppErrors)
+void normalTest3(CppErrors& cppErrors)
 {
-	test4(cppErrors);
-	CPP_ERRORS_WRAP(cppErrors, "test3 error");
+	normalTest4(cppErrors);
+	CPP_ERRORS_WRAP(cppErrors, "normalTest3 error");
 }
 
-void test2(CppErrors& cppErrors)
+void normalTest2(CppErrors& cppErrors)
 {
-	test3(cppErrors);
-	CPP_ERRORS_WRAP(cppErrors, "test2 error");
+	normalTest3(cppErrors);
+	CPP_ERRORS_WRAP(cppErrors, "normalTest2 error");
 }
 
-void test1(CppErrors& cppErrors)
+void normalTest1(CppErrors& cppErrors)
 {
-	test2(cppErrors);
-	CPP_ERRORS_WRAP(cppErrors, "test1 error");
+	normalTest2(cppErrors);
+	CPP_ERRORS_WRAP(cppErrors, "normalTest1 error");
 }
 
-int main()
-{
+void normalTest() {
 	CppErrors cppErrors;
-	test1(cppErrors);
-	
+	normalTest1(cppErrors);
+
 	if (cppErrors.IsValid())
 	{
 		cout << "cppErrors is valid" << endl;
-		
+
 		for (auto& error : cppErrors.GetErrors())
 		{
 			cout << error << endl;
 		}
-		
+
 
 		cout << "first error: " << cppErrors.GetFirstError() << endl;
 	}
@@ -49,6 +48,62 @@ int main()
 	{
 		cout << "cppErrors is invalid" << endl;
 	}
+}
+
+void globalTest4()
+{
+	GLOBAL_CPP_ERRORS_WRAP("globalTest4 error");
+}
+
+void globalTest3()
+{
+	globalTest4();
+	GLOBAL_CPP_ERRORS_WRAP("globalTest3 error");
+}
+
+void globalTest2()
+{
+	globalTest3();
+	GLOBAL_CPP_ERRORS_WRAP("globalTest2 error");
+}
+
+void globalTest1()
+{
+	globalTest2();
+	GLOBAL_CPP_ERRORS_WRAP("globalTest1 error");
+}
+
+void globalTest()
+{
+	GLOBAL_CPP_ERRORS_CLEAR;
+	globalTest1();
+
+	if (GLOBAL_CPP_ERRORS_IS_VALID)
+	{
+		cout << "globalCppErrors is valid" << endl;
+
+		for (auto& error : GLOBAL_CPP_ERRORS_GET_ERRORS)
+		{
+			cout << error << endl;
+		}
+
+		cout << "first error: " << GLOBAL_CPP_ERRORS_GET_FIRST_ERROR << endl;
+	}
+	else
+	{
+		cout << "globalCppErrors is invalid" << endl;
+	}
+}
+
+int main()
+{
+	normalTest();
+
+	cout << endl;
+	
+	globalTest();
+
+	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
