@@ -5,31 +5,31 @@
 
 #include "CppErrors.h"
 
-void normalTest4(CppErrors& cppErrors)
+void normalTest4(CppErrors<string>& cppErrors)
 {
 	CPP_ERRORS_WRAP(cppErrors, "normalTest4 error");
 }
 
-void normalTest3(CppErrors& cppErrors)
+void normalTest3(CppErrors<string>& cppErrors)
 {
 	normalTest4(cppErrors);
 	CPP_ERRORS_WRAP(cppErrors, "normalTest3 error");
 }
 
-void normalTest2(CppErrors& cppErrors)
+void normalTest2(CppErrors<string>& cppErrors)
 {
 	normalTest3(cppErrors);
 	CPP_ERRORS_WRAP(cppErrors, "normalTest2 error");
 }
 
-void normalTest1(CppErrors& cppErrors)
+void normalTest1(CppErrors<string>& cppErrors)
 {
 	normalTest2(cppErrors);
 	CPP_ERRORS_WRAP(cppErrors, "normalTest1 error");
 }
 
 void normalTest() {
-	CppErrors cppErrors;
+	CppErrors<string> cppErrors;
 	normalTest1(cppErrors);
 
 	if (cppErrors.IsValid())

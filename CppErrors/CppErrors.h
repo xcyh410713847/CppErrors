@@ -16,9 +16,10 @@ using namespace std;
 
 #pragma region CppErrors
 
+template<typename T>
 class CppErrors
 {
-	vector<string> errors;
+	vector<T> errors;
 
 public:
 	CppErrors() {};
@@ -27,17 +28,17 @@ public:
 	}
 
 	// 添加错误
-	void AddError(const string& error) {
+	void AddError(const T& error) {
 		errors.push_back(error);
 	}
 
 	// 获取错误列表
-	const vector<string> GetErrors() const {
+	const vector<T> GetErrors() const {
 		return errors;
 	};
 
 	// 获取首个错误
-	const string GetFirstError() const {
+	const T GetFirstError() const {
 		if (errors.size() > 0)
 		{
 			return errors[0];
@@ -70,7 +71,7 @@ public:
 
 #pragma region GlobalCppErrors
 
-CppErrors globalCppErrors;
+CppErrors<string> globalCppErrors;
 
 #define GLOBAL_CPP_ERRORS_WRAP(error)		CPP_ERRORS_WRAP(globalCppErrors, error)
 #define GLOBAL_CPP_ERRORS_CLEAR				globalCppErrors.Clear()
