@@ -85,7 +85,7 @@ public:
 #define CPP_ERRORS_WRAP(cppErrors, error) cppErrors.AddError(error, emptyTrace)
 
 // 带堆栈的错误
-#define CPP_ERRORS_WRAP_TRACE(cppErrors, error, trace)                            \
+#define CPP_ERRORS_WRAP_TRACE(cppErrors, error)                                   \
 	{                                                                             \
 		stringstream ss;                                                          \
 		ss << "[" << __FILE__ << ":" << __LINE__ << "(" << __FUNCTION__ << ")] "; \
