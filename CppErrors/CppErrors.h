@@ -14,31 +14,33 @@
 
 using namespace std;
 
-#pragma region CppErrors
-
-template<typename T>
+template <typename T>
 class CppErrors
 {
 	vector<T> errors;
 
 public:
-	CppErrors() {};
-	~CppErrors() {
+	CppErrors(){};
+	~CppErrors()
+	{
 		errors.clear();
 	}
 
 	// 添加错误
-	void AddError(const T& error) {
+	void AddError(const T &error)
+	{
 		errors.push_back(error);
 	}
 
 	// 获取错误列表
-	const vector<T> GetErrors() const {
+	const vector<T> GetErrors() const
+	{
 		return errors;
 	};
 
 	// 获取首个错误
-	const T GetFirstError() const {
+	const T GetFirstError() const
+	{
 		if (errors.size() > 0)
 		{
 			return errors[0];
@@ -50,35 +52,23 @@ public:
 	}
 
 	// 是否有效
-	bool IsValid() const {
+	bool IsValid() const
+	{
 		return !errors.empty();
 	}
 
 	// 清空错误
-	void Clear() {
+	void Clear()
+	{
 		errors.clear();
 	}
 };
 
-#define CPP_ERRORS_WRAP(cppErrors, error)	\
-{	\
-	stringstream ss;	\
-	ss << "[" << __FILE__ << ":" << __LINE__ << "(" << __FUNCTION__ << ")] " << error;	\
-	cppErrors.AddError(ss.str());	\
-}
-
-#pragma endregion
-
-#pragma region GlobalCppErrors
-
-CppErrors<string> globalCppErrors;
-
-#define GLOBAL_CPP_ERRORS_WRAP(error)		CPP_ERRORS_WRAP(globalCppErrors, error)
-#define GLOBAL_CPP_ERRORS_CLEAR				globalCppErrors.Clear()
-#define GLOBAL_CPP_ERRORS_IS_VALID			globalCppErrors.IsValid()
-#define GLOBAL_CPP_ERRORS_GET_ERRORS		globalCppErrors.GetErrors()
-#define GLOBAL_CPP_ERRORS_GET_FIRST_ERROR	globalCppErrors.GetFirstError()
-
-#pragma endregion
+#define CPP_ERRORS_WRAP(cppErrors, error)                                                  \
+	{                                                                                      \
+		stringstream ss;                                                                   \
+		ss << "[" << __FILE__ << ":" << __LINE__ << "(" << __FUNCTION__ << ")] " << error; \
+		cppErrors.AddError(ss.str());                                                      \
+	}
 
 #endif // __CPP_ERRORS_H__

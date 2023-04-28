@@ -4,4 +4,4 @@ project(CppErrorsTest)
 
 include_directories("${PROJECT_SOURCE_DIR}/CppErrors")
 
-add_subdirectory(Test)
+add_subdirectory(TestString)
