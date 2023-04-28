@@ -63,6 +63,11 @@ void test()
     {
         cout << "cppErrors is invalid" << endl;
     }
+
+    // 测试空错误获得首个错误
+    CppErrors<Error> cppErrors2;
+    Error error = cppErrors2.GetFirstError();
+    cout << "first error: code " << error.code << " message " << error.message << endl;
 }
 
 int main()

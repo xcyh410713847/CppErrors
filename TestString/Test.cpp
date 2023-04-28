@@ -52,6 +52,10 @@ void test()
     {
         cout << "cppErrors is invalid" << endl;
     }
+
+    // 测试空错误获得首个错误
+    CppErrors<string> cppErrors2;
+    cout << "empty error first error: " << cppErrors2.GetFirstError() << endl;
 }
 
 int main()
