@@ -5,3 +5,4 @@ project(CppErrorsTest)
 include_directories("${PROJECT_SOURCE_DIR}/CppErrors")
 
 add_subdirectory(TestString)
+add_subdirectory(TestStruct)

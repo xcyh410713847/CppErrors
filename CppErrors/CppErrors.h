@@ -19,30 +19,46 @@ string emptyTrace = "";
 template <typename T>
 class CppErrors
 {
-	vector<T> errors;
-	vector<string> errorTrace;
+	vector<T> errors;		   // 错误列表
+	vector<string> errorTrace; // 错误堆栈
 
 public:
 	CppErrors(){};
 	~CppErrors()
 	{
 		errors.clear();
+		errorTrace.clear();
 	}
 
-	// 添加错误
+	/** 添加错误
+	 * @param const T &error	: 错误
+	 * @param string trace		: 错误堆栈
+	 */
 	void AddError(const T &error, string trace)
 	{
 		errors.push_back(error);
 		errorTrace.push_back(trace);
 	}
 
-	// 获取错误列表
+	/** 获取错误列表
+	 * @return const vector<T>	: 错误列表
+	 */
 	const vector<T> GetErrors() const
 	{
 		return errors;
 	};
 
-	// 获取首个错误
+	/** 获取错误堆栈
+	 * @return const vector<string>	: 错误堆栈
+	 */
+	const vector<string> GetErrorTrace() const
+	{
+		return errorTrace;
+	}
+
+	/** 获取首个错误
+	 * @return const T	: 首个错误
+	 */
 	const T GetFirstError() const
 	{
 		if (errors.size() > 0)
@@ -51,20 +67,17 @@ public:
 		}
 		else
 		{
-			return "";
+			T t;
+			return t;
 		}
 	}
 
-	// 是否有效
+	/** 是否有效
+	 * @return bool	: true 有效, false 无效
+	 */
 	bool IsValid() const
 	{
 		return !errors.empty();
-	}
-
-	// 清空错误
-	void Clear()
-	{
-		errors.clear();
 	}
 };
 
